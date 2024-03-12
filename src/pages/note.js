@@ -4,7 +4,7 @@ import { useQuery, gql } from "@apollo/client";
 import Note from "../components/Note";
 
 const GET_NOTE = gql`
-    query Note($noteId: String!) {
+    query Note($noteId: ID!) {
             note(id: $noteId) {
             id
             createdAt
@@ -22,8 +22,8 @@ const GET_NOTE = gql`
 const NotePage = () => {
 
     const { id } = useParams();
-console.log('Received id:', id);
-    const {loading, error, data}  = useQuery(GET_NOTE, {variables: {id}});
+    console.log('Received id:', id);
+    const {loading, error, data}  = useQuery(GET_NOTE, {variables: {noteId: id}});
     if (loading) return <p>Loading...</p>
     
     if (error) return `Error! ${error}`;
