@@ -34,11 +34,22 @@ const Form = styled.form`
 
 const SignUp = () => {
     const navigate = useNavigate()
+    const client = useApolloClient();
 
     const [signUp, {loading, error}] = useMutation(SIGNUP_USER, {
         onCompleted: data => {
             localStorage.setItem('token', data.signUp)
             console.log(data.signUp);
+            client.writeQuery({
+                query:gql`
+                    query IsLoggedIn {
+                        isLoggedIn @client
+                    }
+                `,
+                data: {
+                    isLoggedIn: true
+                }
+            });
             navigate('/')
         }
     })
