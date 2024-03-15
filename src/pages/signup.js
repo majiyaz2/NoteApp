@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom'
 
 
 import Button from '../components/Button'
+import UserForm from '../components/UserForm';
 
 const SIGNUP_USER = gql`
     mutation signUp($email: String!, $username: String!, $password: String!) {
@@ -12,25 +13,6 @@ const SIGNUP_USER = gql`
     }
 `
 
-const Wrapper = styled.div`
-    border: 1px solid #f5f4f0;
-    max-width: 500px;
-    padding: 1em;
-    margin: 0 auto;
-
-`
-
-const Form = styled.form`
-    label,
-    input{
-        display: block;
-        line-height: 2em;
-    }
-    input{
-        width 100%
-        margin-bottom: 1em
-    }
-`
 
 const SignUp = () => {
     const navigate = useNavigate()
@@ -54,44 +36,19 @@ const SignUp = () => {
         }
     })
 
-    const [values, setValues] = useState({
-        username: "",
-        email: "",
-        password: "",
-    });
-    const handleChange=(event)=>{
-        setValues({...values,[event.target.name]: event.target.value})
-            };
-      
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        signUp({
-            variables: {
-                ...values
-            }
-        });
-      };
+
     
     useEffect(() => {
         document.title = 'Sign Up - NoteApp';
     });
 
-return(
-        <Wrapper>
-            <h2>Sign Up</h2>
-            <Form
-             onSubmit={handleSubmit}
-            >
-                <label htmlFor='username'>Username</label>
-                <input required type='text' id='username' name='username' placeholder='Username' value={values.username} onChange={handleChange}/>
-                <label htmlFor='email'>Email</label>
-                <input required type='text' id='email' name='email' placeholder='Email' value={values.email} onChange={handleChange}/>
-                <label htmlFor='password'>Password</label>
-                <input required type='password' id='password' name='password' placeholder='Password' value={values.password} onChange={handleChange}/>
-                <Button type='submit' onClick={handleSubmit}>Submit</Button>
-            </Form>
-        </Wrapper>
-    );
+    return(
+            <React.Fragment>
+                <UserForm action = {signUp} formType = "signup"/>
+                {loading && <p>Loading...</p>}
+                {error && <p>Error creating an account! {error}</p>}
+            </React.Fragment>
+        );
 }
 
 export default SignUp
