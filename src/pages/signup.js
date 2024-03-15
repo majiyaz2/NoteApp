@@ -33,7 +33,9 @@ const Form = styled.form`
 const SignUp = props => {
     const [signUp, {loading, error}] = useMutation(SIGNUP_USER, {
         onCompleted: data => {
+            localStorage.setItem('token', data.signUp)
             console.log(data.signUp);
+            props.history.push('/')
         }
     })
 
