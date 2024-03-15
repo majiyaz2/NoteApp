@@ -1,13 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import logo from "../img/logo.svg";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, gql, useApolloClient, ApolloProvider} from "@apollo/client";
 import { Link } from "react-router-dom";
+import ButtonAsLink from "./ButtonAsLink";
+import {useNavigate} from 'react-router-dom'
 
 const IS_LOGGED_IN = gql`
-    {
-        isLoggedIn @client
-    }
+query IsLoggedIn {
+    isLoggedIn @client
+  }
 `
 
 const HeaderBar = styled.header`
@@ -32,7 +34,10 @@ const UserState = styled.div`
 `
 
 const Header = () => {
+    const navigate = useNavigate()
     const {data} = useQuery(IS_LOGGED_IN)
+    console.log(data)
+    const client = useApolloClient()
     return (
         <HeaderBar>
             <img src={logo} alt="logo"/>
@@ -40,7 +45,23 @@ const Header = () => {
             <UserState>
                 {
                     data.isLoggedIn ? (
-                        <p>Log Out</p>
+                        <ApolloProvider>
+                        <ButtonAsLink
+                            onClick={()=>{
+                                localStorage.removeItem('token')
+                                client.writeQuery({
+                                    query: IS_LOGGED_IN,
+                                    data: {
+                                        isLoggedIn: false
+                                    }
+                                })
+                                // client.resetStore()
+                                navigate('/')
+                            }}
+                        >
+                            Log Out
+                        </ButtonAsLink>
+                            </ApolloProvider>
                     ):(
                         <p>
                             <Link to={'/signin'}>Sign In</Link>or{' '}
