@@ -1,7 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import styled from 'styled-components';
+import { useMutation, useApolloClient, gql } from '@apollo/client';
 
 import Button from '../components/Button'
+
+const SIGNUP_USER = gql`
+    mutation signUp($email: String!, $username: String!, $password: String!) {
+        signUp(email: $email, username: $username, password: $password)
+    }
+`
 
 const Wrapper = styled.div`
     border: 1px solid #f5f4f0;
@@ -23,8 +30,14 @@ const Form = styled.form`
     }
 `
 
-export default function SignUp(){
-   const [values, setValues] = useState({
+const SignUp = props => {
+    const [signUp, {loading, error}] = useMutation(SIGNUP_USER, {
+        onCompleted: data => {
+            console.log(data.signUp);
+        }
+    })
+
+    const [values, setValues] = useState({
         username: "",
         email: "",
         password: "",
@@ -34,8 +47,12 @@ export default function SignUp(){
             };
       
     const handleSubmit = (event) => {
-       event.preventDefault();
-        console.log(values);
+        event.preventDefault();
+        signUp({
+            variables: {
+                ...values
+            }
+        });
       };
     
     useEffect(() => {
@@ -59,3 +76,5 @@ return(
         </Wrapper>
     );
 }
+
+export default SignUp
