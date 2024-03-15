@@ -33,7 +33,36 @@ const Home = () => {
 
     if (error) return <p>Error!</p>;
     
-    return <NoteFeed notes={data.noteFeed.notes}/>
+    return (
+        <React.Fragment>
+            <NoteFeed notes={data.noteFeed.notes}/>
+            {data.noteFeed.hasNextPage && (
+                <button onClick={()=>
+                    fetchMore({
+                        variables: {
+                            cursor: data.noteFeed.cursor
+                        },
+                        updateQuery: (previousResult, {fetchMoreResult}) => {
+                            return {
+                                noteFeed: {
+                                    cursor: fetchMoreResult.noteFeed.cursor,
+                                    hasNextPage: fetchMoreResult.noteFeed.hasNextPage,
+                                    notes: [
+                                        ...previousResult.noteFeed.notes,
+                                        ...fetchMoreResult.noteFeed.notes
+                                    ],
+                                    __typename: 'noteFeed'
+                                }
+                            }
+                        }
+                    })
+                }
+                >
+                    Load more
+                    </button>
+            )}
+        </React.Fragment>
+    );
 };
 
 export default Home;
