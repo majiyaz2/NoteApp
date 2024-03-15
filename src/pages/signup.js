@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import styled from 'styled-components';
 import { useMutation, useApolloClient, gql } from '@apollo/client';
+import {useNavigate} from 'react-router-dom'
+
 
 import Button from '../components/Button'
 
@@ -30,12 +32,14 @@ const Form = styled.form`
     }
 `
 
-const SignUp = props => {
+const SignUp = () => {
+    const navigate = useNavigate()
+
     const [signUp, {loading, error}] = useMutation(SIGNUP_USER, {
         onCompleted: data => {
             localStorage.setItem('token', data.signUp)
             console.log(data.signUp);
-            props.history.push('/')
+            navigate('/')
         }
     })
 
