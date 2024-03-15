@@ -55,7 +55,7 @@ const Header = () => {
                                         isLoggedIn: false
                                     }
                                 })
-                                // client.resetStore()
+                                client.resetStore()
                                 navigate('/')
                             }}
                         >
