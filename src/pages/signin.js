@@ -19,8 +19,8 @@ const SignIn = () => {
 
     const [signIn, {loading, error}] = useMutation(SIGNIN_USER, {
         onCompleted: data => {
-            localStorage.setItem('token', data.signUp)
-            console.log(data.signUp);
+            localStorage.setItem('token', data.signIn)
+            console.log(data.signIn);
             client.writeQuery({
                 query:gql`
                     query IsLoggedIn {
@@ -41,9 +41,9 @@ const SignIn = () => {
 
     return (
         <React.Fragment>
-            <UserForm action = {signIn} formType="signIn"/>
             {loading && <p>Loading...</p>}
             {error && <p>Error Signing In! {error}</p>}
+            <UserForm action = {signIn} formType="signIn"/>
         </React.Fragment>
     );
 };
