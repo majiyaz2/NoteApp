@@ -10,6 +10,7 @@ import NotePage from "./note";
 import SignUp from "./signup";
 import SignIn from "./signin";
 import { resultKeyNameFromField } from "@apollo/client/utilities";
+import NewNote from "./new";
 
 
 const IS_LOGGED_IN = gql`
@@ -42,6 +43,7 @@ const Pages = () => {
             <Layout>
                 <Routes>
                     <Route exact path="/" element={<Home/>}/>
+                    <Route  path="/new" element={<PrivateRoute component={NewNote}/>}/>
                     <Route  path="/mynotes" element={<PrivateRoute component={MyNotes}/>}/>
                     <Route  path="/favorites" element={<PrivateRoute component={Favorites}/>}/>
                     <Route  path="/note/:id" element={<NotePage/>}/>
