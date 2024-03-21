@@ -1,15 +1,31 @@
 import React, { useEffect } from "react";
+import { useQuery,gql } from "@apollo/client";
 
-const Favorites = () => {
+import NoteFeed from "../components/NoteFeed";
+import { GET_MY_FAVS } from "../gql/query";
+
+
+
+const MyNotes = () => {
     useEffect(() => {
-        document.title = "Favorites - Notedly";
+        document.title = "My Notes - Notedly";
     });
 
-    return (
-        <div>
-            <p>These are my favorites</p>
-        </div>
-    );
+    const {loading, error, data} = useQuery(GET_MY_FAVS);
+
+    if (loading) return <p>Loading...</p>
+    
+    if (error) return `Error! ${error}`;
+
+    if (data.me.favorites.length !== 0){
+        return <NoteFeed notes={data.me.favorites}/>
+    }else{
+        return (
+            <div>
+                <p>These no favorites yet</p>
+            </div>
+        );
+    }
 };
 
-export default Favorites
+export default MyNotes;
