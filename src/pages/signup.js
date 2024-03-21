@@ -6,12 +6,10 @@ import {useNavigate} from 'react-router-dom'
 
 import Button from '../components/Button'
 import UserForm from '../components/UserForm';
+import { IS_LOGGED_IN } from '../gql/query';
+import { SIGNUP_USER } from '../gql/mutation';
 
-const SIGNUP_USER = gql`
-    mutation signUp($email: String!, $username: String!, $password: String!) {
-        signUp(email: $email, username: $username, password: $password)
-    }
-`
+
 
 
 const SignUp = () => {
@@ -23,11 +21,7 @@ const SignUp = () => {
             localStorage.setItem('token', data.signUp)
             console.log(data.signUp);
             client.writeQuery({
-                query:gql`
-                    query IsLoggedIn {
-                        isLoggedIn @client
-                    }
-                `,
+                query:IS_LOGGED_IN,
                 data: {
                     isLoggedIn: true
                 }

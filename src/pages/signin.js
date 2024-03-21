@@ -4,12 +4,11 @@ import { useMutation, useApolloClient, gql } from '@apollo/client';
 import {useNavigate} from 'react-router-dom'
 
 import UserForm from '../components/UserForm';
+import { IS_LOGGED_IN } from '../gql/query';
+import { SIGNIN_USER } from '../gql/mutation';
 
-const SIGNIN_USER = gql`
-    mutation signIn($email: String!, $password: String!) {
-        signIn(email: $email, password: $password)
-    }
-`
+
+
 
 
 const SignIn = () => {
@@ -22,11 +21,7 @@ const SignIn = () => {
             localStorage.setItem('token', data.signIn)
             console.log(data.signIn);
             client.writeQuery({
-                query:gql`
-                    query IsLoggedIn {
-                        isLoggedIn @client
-                    }
-                `,
+                query: IS_LOGGED_IN,
                 data: {
                     isLoggedIn: true
                 }

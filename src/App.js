@@ -3,6 +3,7 @@ import Pages from "./pages";
 import GlobalStyle from "./components/GlobalStyle";
 import { ApolloClient, ApolloProvider,createHttpLink, InMemoryCache, gql } from "@apollo/client";
 import { setContext } from "apollo-link-context";
+import { IS_LOGGED_IN } from "./gql/query";
 
 const uri = "http://localhost:4000/api";
 
@@ -30,19 +31,14 @@ const data = {
   isLoggedIn: !!localStorage.getItem('token')
 }
 
-const IS_LOGGED_IN_QUERY = gql`
-  query IsLoggedIn {
-    isLoggedIn @client
-  }
-`;
 
 cache.writeQuery({
-  query: IS_LOGGED_IN_QUERY,
+  query: IS_LOGGED_IN,
   data
 })
 
 client.onResetStore(()=> cache.writeQuery({
-  query: IS_LOGGED_IN_QUERY,
+  query: IS_LOGGED_IN,
   data
 }))
 function App(){

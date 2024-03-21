@@ -11,13 +11,8 @@ import SignUp from "./signup";
 import SignIn from "./signin";
 import { resultKeyNameFromField } from "@apollo/client/utilities";
 import NewNote from "./new";
+import { IS_LOGGED_IN } from "../gql/query";
 
-
-const IS_LOGGED_IN = gql`
-query IsLoggedIn {
-    isLoggedIn @client
-  }
-`
 
 
 const PrivateRoute = ({component: Component, ...rest}) => {
