@@ -48,5 +48,10 @@ mutation Mutation($updateNoteId: ID!, $content: String!) {
     }
   }
 `
+const DELETE_NOTE = gql`
+  mutation DeleteNote($deleteNoteId: ID!) {
+    deleteNote(id: $deleteNoteId)
+  }
+`
 
-export {NEW_NOTE, SIGNIN_USER, SIGNUP_USER, EDIT_NOTE};
+export {NEW_NOTE, SIGNIN_USER, SIGNUP_USER, EDIT_NOTE, DELETE_NOTE};
