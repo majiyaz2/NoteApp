@@ -83,4 +83,16 @@ const GET_MY_FAVS = gql`
     }
 `;
 
-export { IS_LOGGED_IN, GET_NOTE, GET_NOTES, GET_MY_NOTES, GET_MY_FAVS};
+const GET_ME = gql`
+query me {
+    me {
+        id
+        username
+        favorites {
+            id
+        }
+    }
+}
+`
+
+export { IS_LOGGED_IN, GET_NOTE, GET_NOTES, GET_MY_NOTES, GET_MY_FAVS, GET_ME};

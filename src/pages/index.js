@@ -9,9 +9,9 @@ import Layout from "../components/Layout";
 import NotePage from "./note";
 import SignUp from "./signup";
 import SignIn from "./signin";
-import { resultKeyNameFromField } from "@apollo/client/utilities";
 import NewNote from "./new";
 import { IS_LOGGED_IN } from "../gql/query";
+import EditNote from "./edit";
 
 
 
@@ -41,6 +41,7 @@ const Pages = () => {
                     <Route  path="/new" element={<PrivateRoute component={NewNote}/>}/>
                     <Route  path="/mynotes" element={<PrivateRoute component={MyNotes}/>}/>
                     <Route  path="/favorites" element={<PrivateRoute component={Favorites}/>}/>
+                    <Route  path="/edit/:id" element={<PrivateRoute component={EditNote}/>}/>
                     <Route  path="/note/:id" element={<NotePage/>}/>
                     <Route  path="/signup" element={<SignUp/>}/>
                     <Route  path="/signin" element={<SignIn/>}/>

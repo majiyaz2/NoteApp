@@ -30,6 +30,23 @@ const SIGNUP_USER = gql`
         signUp(email: $email, username: $username, password: $password)
     }
 `
+const EDIT_NOTE = gql`
+mutation Mutation($updateNoteId: ID!, $content: String!) {
+  updateNote(id: $updateNoteId, content: $content) {
+      id
+      content
+      createdAt
+      favoriteCount
+      favoritedBy {
+        id
+        username
+      }
+      author {
+        username
+        id
+      }
+    }
+  }
+`
 
-
-export {NEW_NOTE, SIGNIN_USER, SIGNUP_USER};
+export {NEW_NOTE, SIGNIN_USER, SIGNUP_USER, EDIT_NOTE};

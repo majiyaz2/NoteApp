@@ -2,6 +2,9 @@ import React from "react";
 import ReactMarkdown from "react-markdown"
 import {format} from 'date-fns'
 import styled from "styled-components";
+import NoteUser from "./NoteUser";
+import { IS_LOGGED_IN } from "../gql/query";
+import { useQuery } from "@apollo/client";
 
 const StyledNote = styled.article`
     max-width: 800px;
@@ -23,6 +26,7 @@ const UserActions = styled.div`
 `
 
 const Note = ({note}) => {
+    const {loading, error, data} = useQuery(IS_LOGGED_IN);
     return (
         <StyledNote>
             <MetaData>
@@ -33,13 +37,16 @@ const Note = ({note}) => {
                             height = "50px"
                     />
                 </MetaInfo>
-                <MetaInfo>
+                <MetaInfo> 
                     <em>by</em> {note.author.username} <br/>
                     {format(note.createdAt, 'MMM d yyyy')}
                 </MetaInfo>
-                <UserActions>
+                {data.isLoggedIn ? (<UserActions>
+                    <NoteUser note = {note} />
+                </UserActions>):
+                (<UserActions>
                     <em>Favourites:</em> {note.favoriteCount}
-                </UserActions>
+                </UserActions>)}
             </MetaData>
             <ReactMarkdown children={note.content} />
         </StyledNote>

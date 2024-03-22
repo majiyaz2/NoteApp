@@ -18,6 +18,7 @@ const TextArea = styled.textarea`
 `;
 
 const NoteForm = props => {
+    console.log(props.content)
     const [values, setValues] = useState({
         content: props.content || '',
 
