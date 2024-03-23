@@ -5,7 +5,7 @@ import { ApolloClient, ApolloProvider,createHttpLink, InMemoryCache, gql } from 
 import { setContext } from "apollo-link-context";
 import { IS_LOGGED_IN } from "./gql/query";
 
-const uri = "http://localhost:4000/api";
+const uri = "https://notapp.onrender.com/api";
 
 const httpLink = createHttpLink({uri})
 const cache = new InMemoryCache();
