@@ -1,6 +1,6 @@
-# Notedly Web Client
+# NoteApp Web Client
 
-Welcome to the Notedly web client repository! This client-side application allows users to interact with the Notedly social note application, built using GraphQL for efficient data fetching and management.
+Welcome to the Noteapp web client repository! This client-side application allows users to interact with the Notedly social note application, built using GraphQL for efficient data fetching and management.
 
 ## Features
 
@@ -22,12 +22,14 @@ Welcome to the Notedly web client repository! This client-side application allow
 ## Getting Started
 
 To get started with the Notedly web client, follow these steps:
+Visit the site `https://react-pad.netlify.app`
 
 1. Clone this repository to your local machine.
 2. Navigate to the project directory.
 3. Install dependencies by running: `npm install` or `yarn install`.
 4. Start the development server by running: `npm start` or `yarn start`.
 5. Open your browser and visit `http://localhost:3000` to view the application.
+
 
 ## Contributing
 
