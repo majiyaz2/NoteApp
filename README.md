@@ -1,6 +1,6 @@
 # NoteApp Web Client
 
-Welcome to the Noteapp web client repository! This client-side application allows users to interact with the Notedly social note application, built using GraphQL for efficient data fetching and management.
+Welcome to the Noteapp web client repository! This client-side application allows users to interact with the Notedly social note application, built using GraphQL.
 
 ## Features
 
