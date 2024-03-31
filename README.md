@@ -22,6 +22,7 @@ Welcome to the Noteapp web client repository! This client-side application allow
 ## Getting Started
 
 To get started with the Notedly web client, follow these steps:
+
 Visit the site `https://react-pad.netlify.app`
 OR
 
